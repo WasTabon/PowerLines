@@ -5,7 +5,7 @@ public class GridManager : MonoBehaviour
     public static GridManager Instance;
 
     public int width, height;
-    public float cellSize = 1f;
+    public float cellSize = 2f;
     private GridCell[,] grid;
 
     private void Awake()
