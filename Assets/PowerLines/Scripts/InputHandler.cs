@@ -14,7 +14,7 @@ public class InputHandler : MonoBehaviour
 
     private void Update()
     {
-        if (IsPointerOverUI()) return;
+        if (IsPointerOverUI() && !isTouching) return;
 
 #if UNITY_EDITOR || UNITY_STANDALONE
         HandleMouse();
@@ -45,7 +45,7 @@ public class InputHandler : MonoBehaviour
             Vector2 endPos = Input.mousePosition;
             float distance = Vector2.Distance(startPos, endPos);
 
-            if (distance <= maxTapDistance)
+            if (distance <= maxTapDistance && !IsPointerOverUI())
             {
                 OnTap?.Invoke(endPos);
             }
@@ -76,7 +76,7 @@ public class InputHandler : MonoBehaviour
 
             case TouchPhase.Ended:
                 float distance = Vector2.Distance(startPos, touch.position);
-                if (distance <= maxTapDistance)
+                if (distance <= maxTapDistance && !IsPointerOverUI())
                 {
                     OnTap?.Invoke(touch.position);
                 }

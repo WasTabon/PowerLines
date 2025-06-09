@@ -19,12 +19,16 @@ public class UIController : MonoBehaviour
 
     public void ShowBuildPanel()
     {
+        Debug.Log("Showed");
+        _buildPanel.DOKill();
         _buildPanel.DOAnchorPosY(0f, 0.5f)
             .SetEase(Ease.InOutBack);
     }
 
     public void HideBuildPanel()
     {
+        Debug.Log("Clicked");
+        _buildPanel.DOKill();
         _buildPanel.DOAnchorPosY(-240f, 0.5f)
             .SetEase(Ease.InOutBack);
     }
