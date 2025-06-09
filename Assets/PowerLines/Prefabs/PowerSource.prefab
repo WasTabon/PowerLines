@@ -97,3 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ce03dd6fa94c4ca01a3689995a8215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Power Source

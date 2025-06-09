@@ -2428,12 +2428,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501906381}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.034823, y: 2.655117, z: 0.027552458}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -624.4118, y: -1670.838, z: 3.2624035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1844025289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &505232296
 PrefabInstance:
@@ -3221,12 +3221,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647096468}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.034823, y: 2.655117, z: 0.027552458}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -624.4118, y: -1670.838, z: 3.2624035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1844025289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &649804475
 PrefabInstance:
@@ -8311,7 +8311,7 @@ GameObject:
   - component: {fileID: 1398680298}
   - component: {fileID: 1398680297}
   m_Layer: 5
-  m_Name: CurrentBuilding
+  m_Name: CurrentBuildingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8356,7 +8356,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Current Building: \nPower Source"
+  m_text: "Current Building: \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8469,7 +8469,7 @@ MonoBehaviour:
   onMessage:
     m_PersistentCalls:
       m_Calls: []
-  waitForNormalChars: 0.03
+  waitForNormalChars: 0.015
   waitLong: 0.6
   waitMiddle: 0.2
   avoidMultiplePunctuationWait: 0
@@ -8490,7 +8490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typewriterStartsAutomatically: 1
+  typewriterStartsAutomatically: 0
   animationLoop: 0
   timeScale: 0
   _text: "<wave>Current Building: \nPower Source</wave>"
@@ -8498,11 +8498,11 @@ MonoBehaviour:
   referenceFontSize: 10
   isResettingTimeOnNewText: 1
   useDefaultDatabases: 1
-  databaseBehaviors: {fileID: 11400000, guid: 5fa20c1f7bc6fff44901db00966c7d30, type: 2}
-  databaseAppearances: {fileID: 11400000, guid: 397666fd694f49046a8e4135f9fba7c9, type: 2}
+  databaseBehaviors: {fileID: 0}
+  databaseAppearances: {fileID: 0}
   useDefaultStyleSheet: 1
   styleSheet: {fileID: 0}
-  databaseActions: {fileID: 11400000, guid: 8b013777b71ca8149ae57bd29c7fad76, type: 2}
+  databaseActions: {fileID: 0}
   defaultAppearancesTags:
   - size
   defaultDisappearancesTags:
@@ -9525,7 +9525,7 @@ GameObject:
   - component: {fileID: 1650683814}
   - component: {fileID: 1650683813}
   m_Layer: 5
-  m_Name: CurrentBuilding (1)
+  m_Name: CurrentBuildintStatsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10269,12 +10269,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718263609}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.42879, y: 11.4611635, z: 0.071203455}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -628.8754, y: -1662.032, z: 3.3060546}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1844025289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1737970010
 PrefabInstance:
@@ -10926,6 +10926,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 710041424410071890, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
   m_PrefabInstance: {fileID: 1821305706}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1844025288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844025289}
+  m_Layer: 0
+  m_Name: Controllers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844025289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844025288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 625.44666, y: 1673.4932, z: -3.2348511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 501906383}
+  - {fileID: 647096470}
+  - {fileID: 1718263611}
+  - {fileID: 1996187945}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1858779602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11592,6 +11627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buildPanel: {fileID: 1706269744}
+  _currentBuildingText: {fileID: 1398680297}
 --- !u!4 &1996187945
 Transform:
   m_ObjectHideFlags: 0
@@ -11600,12 +11636,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996187943}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 830.21075, y: 816.8239, z: -6.974241}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 204.7641, y: -856.66925, z: -3.7393897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1844025289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1996660229
 PrefabInstance:
@@ -12559,8 +12595,5 @@ SceneRoots:
   - {fileID: 1813540076}
   - {fileID: 661840286}
   - {fileID: 533812493}
-  - {fileID: 501906383}
-  - {fileID: 647096470}
   - {fileID: 392292619}
-  - {fileID: 1718263611}
-  - {fileID: 1996187945}
+  - {fileID: 1844025289}

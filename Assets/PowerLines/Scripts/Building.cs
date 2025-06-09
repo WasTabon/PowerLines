@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Building : MonoBehaviour
 {
+    public string name;
+    
     protected int _volt;
     protected int _amper;
 

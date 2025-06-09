@@ -1,11 +1,14 @@
 using DG.Tweening;
+using Febucci.UI;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
     public static UIController Instance { get; private set; }
-
+    
     [SerializeField] private RectTransform _buildPanel;
+    
+    [SerializeField] TypewriterByCharacter _currentBuildingText;
     
     private void Awake()
     {
@@ -17,6 +20,11 @@ public class UIController : MonoBehaviour
         _buildPanel.DOAnchorPosY(-240f, 0);
     }
 
+    public void SetCurrentBuildingText(string name)
+    {
+        _currentBuildingText.ShowText($"Current Building:\n{name}");
+    }
+    
     public void ShowBuildPanel()
     {
         Debug.Log("Showed");

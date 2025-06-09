@@ -40,6 +40,11 @@ public class BuildingController : MonoBehaviour
                 _cell = cell;
                 UIController.Instance.ShowBuildPanel();
             }
+            else
+            {
+                string name = cell.GetBuilding().name;
+                UIController.Instance.SetCurrentBuildingText(name);
+            }
         }
     }
 
