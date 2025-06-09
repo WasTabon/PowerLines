@@ -3,6 +3,8 @@ using UnityEngine;
 public class BuildingController : MonoBehaviour
 {
     private Building _currentBuilding;
+
+    private GameObject _building;
     
     private void Start()
     {
@@ -16,6 +18,11 @@ public class BuildingController : MonoBehaviour
     
     private void HandleTap(Vector2 screenPosition)
     {
+        if (_currentBuilding == null)
+            return;
+        if (_building != null)
+            return;
+        
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
         Vector2 worldPos2D = new Vector2(worldPos.x, worldPos.y);
 
@@ -25,6 +32,10 @@ public class BuildingController : MonoBehaviour
         {
             if (!cell.HaveBuilding())
             {
+                Vector3 spawnPos = new Vector3(cell.gameObject.transform.localPosition.x,
+                    cell.gameObject.transform.localPosition.y, -1f);
+                _building = Instantiate(_currentBuilding.gameObject, spawnPos,
+                    _currentBuilding.transform.rotation);
                 UIController.Instance.ShowBuildPanel();
             }
         }

@@ -1,21 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class InputHandler : MonoBehaviour
 {
     public static event Action<Vector2> OnTap;
     public static event Action<Vector2> OnDrag;
 
+    [SerializeField] private GraphicRaycaster graphicRaycaster;
+    [SerializeField] private EventSystem eventSystem;
+
+    private PointerEventData pointerEventData;
+
     private Vector2 startPos;
     private Vector2 lastPos;
     private bool isTouching = false;
+    private bool startedOverUI = false;
     private float maxTapDistance = 20f;
 
     private void Update()
     {
-        if (IsPointerOverUI() && !isTouching) return;
-
 #if UNITY_EDITOR || UNITY_STANDALONE
         HandleMouse();
 #else
@@ -29,15 +35,19 @@ public class InputHandler : MonoBehaviour
         {
             isTouching = true;
             startPos = lastPos = Input.mousePosition;
+            startedOverUI = IsPointerOverUIObject(startPos);
         }
 
         if (Input.GetMouseButton(0) && isTouching)
         {
-            Vector2 currentPos = Input.mousePosition;
-            Vector2 delta = currentPos - lastPos;
-            lastPos = currentPos;
+            if (!startedOverUI)
+            {
+                Vector2 currentPos = Input.mousePosition;
+                Vector2 delta = currentPos - lastPos;
+                lastPos = currentPos;
 
-            OnDrag?.Invoke(delta);
+                OnDrag?.Invoke(delta);
+            }
         }
 
         if (Input.GetMouseButtonUp(0) && isTouching)
@@ -45,12 +55,13 @@ public class InputHandler : MonoBehaviour
             Vector2 endPos = Input.mousePosition;
             float distance = Vector2.Distance(startPos, endPos);
 
-            if (distance <= maxTapDistance && !IsPointerOverUI())
+            if (distance <= maxTapDistance && !startedOverUI)
             {
                 OnTap?.Invoke(endPos);
             }
 
             isTouching = false;
+            startedOverUI = false;
         }
     }
 
@@ -65,36 +76,47 @@ public class InputHandler : MonoBehaviour
             case TouchPhase.Began:
                 isTouching = true;
                 startPos = lastPos = touch.position;
+                startedOverUI = IsPointerOverUIObject(startPos);
                 break;
 
             case TouchPhase.Moved:
-                Vector2 delta = touch.position - lastPos;
-                lastPos = touch.position;
+                if (!startedOverUI)
+                {
+                    Vector2 delta = touch.position - lastPos;
+                    lastPos = touch.position;
 
-                OnDrag?.Invoke(delta);
+                    OnDrag?.Invoke(delta);
+                }
                 break;
 
             case TouchPhase.Ended:
                 float distance = Vector2.Distance(startPos, touch.position);
-                if (distance <= maxTapDistance && !IsPointerOverUI())
+                if (distance <= maxTapDistance && !startedOverUI)
                 {
                     OnTap?.Invoke(touch.position);
                 }
                 isTouching = false;
+                startedOverUI = false;
                 break;
         }
     }
 
-    private bool IsPointerOverUI()
+    private bool IsPointerOverUIObject(Vector2 screenPosition)
     {
-#if UNITY_EDITOR || UNITY_STANDALONE
-        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
-#else
-        if (Input.touchCount > 0)
+        if (graphicRaycaster == null || eventSystem == null)
         {
-            return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+            Debug.LogWarning("Missing GraphicRaycaster or EventSystem reference.");
+            return false;
         }
-        return false;
-#endif
+
+        pointerEventData = new PointerEventData(eventSystem)
+        {
+            position = screenPosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        graphicRaycaster.Raycast(pointerEventData, results);
+
+        return results.Count > 0;
     }
 }
