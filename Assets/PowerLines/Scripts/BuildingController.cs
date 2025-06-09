@@ -5,6 +5,7 @@ public class BuildingController : MonoBehaviour
     private Building _currentBuilding;
 
     private GameObject _building;
+    private Cell _cell;
     
     private void Start()
     {
@@ -36,8 +37,25 @@ public class BuildingController : MonoBehaviour
                     cell.gameObject.transform.localPosition.y, -1f);
                 _building = Instantiate(_currentBuilding.gameObject, spawnPos,
                     _currentBuilding.transform.rotation);
+                _cell = cell;
                 UIController.Instance.ShowBuildPanel();
             }
         }
+    }
+
+    public void DenyBuild()
+    {
+        Destroy(_building);
+        _building = null;
+        _cell = null;
+        UIController.Instance.HideBuildPanel();
+    }
+
+    public void BuildBuilding()
+    {
+        _cell.SetBuilding(_building.GetComponent<Building>());
+        _building = null;
+        _cell = null;
+        UIController.Instance.HideBuildPanel();
     }
 }
