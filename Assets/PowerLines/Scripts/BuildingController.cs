@@ -23,7 +23,10 @@ public class BuildingController : MonoBehaviour
 
         if (col != null && col.gameObject.TryGetComponent(out Cell cell))
         {
-            
+            if (!cell.HaveBuilding())
+            {
+                UIController.Instance.ShowBuildPanel();
+            }
         }
     }
 }
