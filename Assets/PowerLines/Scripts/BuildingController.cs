@@ -4,6 +4,8 @@ public class BuildingController : MonoBehaviour
 {
     private Building _currentBuilding;
 
+    [SerializeField] private LayerMask cellLayerMask; 
+    
     private GameObject _building;
     private Cell _cell;
     
@@ -19,24 +21,20 @@ public class BuildingController : MonoBehaviour
     
     private void HandleTap(Vector2 screenPosition)
     {
-        if (_currentBuilding == null)
+        if (_currentBuilding == null || _building != null)
             return;
-        if (_building != null)
-            return;
-        
+
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
         Vector2 worldPos2D = new Vector2(worldPos.x, worldPos.y);
 
-        Collider2D col = Physics2D.OverlapPoint(worldPos2D);
+        RaycastHit2D hit = Physics2D.Raycast(worldPos2D, Vector2.zero, 0f, cellLayerMask);
 
-        if (col != null && col.gameObject.TryGetComponent(out Cell cell))
+        if (hit.collider != null && hit.collider.TryGetComponent(out Cell cell))
         {
             if (!cell.HaveBuilding())
             {
-                Vector3 spawnPos = new Vector3(cell.gameObject.transform.localPosition.x,
-                    cell.gameObject.transform.localPosition.y, -1f);
-                _building = Instantiate(_currentBuilding.gameObject, spawnPos,
-                    _currentBuilding.transform.rotation);
+                Vector3 spawnPos = new Vector3(cell.transform.position.x, cell.transform.position.y, -1f);
+                _building = Instantiate(_currentBuilding.gameObject, spawnPos, _currentBuilding.transform.rotation);
                 _cell = cell;
                 UIController.Instance.ShowBuildPanel();
             }
@@ -59,6 +57,7 @@ public class BuildingController : MonoBehaviour
     public void BuildBuilding()
     {
         _cell.SetBuilding(_building.GetComponent<Building>());
+        _building.GetComponent<Building>().CheckBuildings();
         _building = null;
         _cell = null;
         UIController.Instance.HideBuildPanel();
