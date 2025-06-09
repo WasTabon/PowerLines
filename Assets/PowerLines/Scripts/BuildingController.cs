@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class BuildingController : MonoBehaviour
@@ -41,7 +42,13 @@ public class BuildingController : MonoBehaviour
             else
             {
                 string name = cell.GetBuilding().name;
-                UIController.Instance.SetCurrentBuildingText(name);
+                Transform bTransform = cell.GetBuilding().gameObject.transform;
+                bTransform.DOKill();
+                bTransform.DOPunchScale(Vector3.one * 0.35f, 0.4f, 10, 1)
+                    .OnComplete((() =>
+                    {
+                        UIController.Instance.SetCurrentBuildingText(name);
+                    }));
             }
         }
     }
