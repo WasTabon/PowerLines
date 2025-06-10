@@ -32,27 +32,26 @@ public class BuildingController : MonoBehaviour
 
         if (hit.collider != null && hit.collider.TryGetComponent(out Cell cell))
         {
+            _cell = cell;
+            
             if (!cell.HaveBuilding())
             {
-                Vector3 spawnPos = new Vector3(cell.transform.position.x, cell.transform.position.y, -1f);
-                _building = Instantiate(_currentBuilding.gameObject, spawnPos, _currentBuilding.transform.rotation);
-                _cell = cell;
-                UIController.Instance.ShowBuildPanel();
+                PlaceBuilding(cell);
             }
             else
             {
-                string name = cell.GetBuilding().name;
-                Transform bTransform = cell.GetBuilding().gameObject.transform;
-                bTransform.DOKill();
-                bTransform.DOPunchScale(Vector3.one * 0.35f, 0.4f, 10, 1)
-                    .OnComplete((() =>
-                    {
-                        UIController.Instance.SetCurrentBuildingText(name);
-                    }));
+                ClickOnBuilding(cell);
             }
         }
     }
-
+    
+    public void BuildBuilding()
+    {
+        _cell.SetBuilding(_building.GetComponent<Building>());
+        _building = null;
+        _cell = null;
+        UIController.Instance.HideBuildPanel();
+    }
     public void DenyBuild()
     {
         Destroy(_building);
@@ -61,12 +60,43 @@ public class BuildingController : MonoBehaviour
         UIController.Instance.HideBuildPanel();
     }
 
-    public void BuildBuilding()
+    private void PlaceBuilding(Cell cell)
     {
-        _cell.SetBuilding(_building.GetComponent<Building>());
-        _building.GetComponent<Building>().CheckBuildings();
-        _building = null;
-        _cell = null;
-        UIController.Instance.HideBuildPanel();
+        Vector3 spawnPos = new Vector3(cell.transform.position.x, cell.transform.position.y, -1f);
+        _building = Instantiate(_currentBuilding.gameObject, spawnPos, _currentBuilding.transform.rotation);
+        bool isBuilding = _building.GetComponent<Building>().CheckBuildings();
+
+        if (!isBuilding)
+        {
+            UIController.Instance.ShowBuildPanel();
+        }
+        else
+        {
+            UIController.Instance.PopupCantBuildPanel();
+            Destroy(_building);
+            _building = null;
+            _cell = null;
+        }
+    }
+
+    private void ClickOnBuilding(Cell cell)
+    {
+        var building = cell.GetBuilding();
+        string name = building.name;
+        Transform bTransform = building.gameObject.transform;
+
+        bTransform.localScale = Vector3.one;
+        bTransform.DOPunchScale(Vector3.one * 0.35f, 0.4f, 10, 1)
+            .OnStart(() =>
+            {
+                UIController.Instance.SetCurrentBuildingText(name);
+            })
+            .OnComplete((() =>
+            {
+                if (bTransform.localScale.x < 1 && bTransform.localScale.y < 1)
+                {
+                    bTransform.DOScale(Vector3.one, 0.3f);
+                }
+            }));
     }
 }

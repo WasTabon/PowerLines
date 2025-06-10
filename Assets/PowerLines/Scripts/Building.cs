@@ -1,14 +1,27 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+[Flags]
+public enum Direction
+{
+    None  = 0,
+    Up    = 1 << 0,
+    Down  = 1 << 1,
+    Left  = 1 << 2,
+    Right = 1 << 3
+}
 
 public abstract class Building : MonoBehaviour
 {
     public string name;
-    
-    protected int _volt;
-    protected int _amper;
-    
-    [SerializeField] protected Vector2 checkBoxSize = Vector2.one;
+
+    [SerializeField] protected int _volt;
+    [SerializeField] protected int _amper;
+
+    [SerializeField] protected Vector2 checkBoxSize;
+    [SerializeField] protected Direction checkDirections = Direction.Up | Direction.Down;
 
     public int Volt => _volt;
     public int Amper => _amper;
@@ -19,38 +32,68 @@ public abstract class Building : MonoBehaviour
     {
         _isActive = true;
     }
-    
-    public void CheckBuildings()
+
+    public bool CheckBuildings()
     {
-        Vector2 frontPosition = (Vector2)transform.position + (Vector2)transform.up * checkBoxSize.y;
-        Vector2 backPosition  = (Vector2)transform.position - (Vector2)transform.up * checkBoxSize.y;
+        Dictionary<Direction, Vector2> directionOffsets = new()
+        {
+            { Direction.Up,    Vector2.up },
+            { Direction.Down,  Vector2.down },
+            { Direction.Left,  Vector2.left },
+            { Direction.Right, Vector2.right }
+        };
 
-        var frontHits = Physics2D.OverlapBoxAll(frontPosition, checkBoxSize, transform.eulerAngles.z);
-        var backHits = Physics2D.OverlapBoxAll(backPosition, checkBoxSize, transform.eulerAngles.z);
+        foreach (var kvp in directionOffsets)
+        {
+            if ((checkDirections & kvp.Key) == 0) continue;
 
-        var frontBuildings = frontHits
-            .Select(hit => hit.GetComponent<Building>())
-            .Where(b => b != null && b != this)
-            .ToList();
+            Vector2 offset = kvp.Value * 0.5f;
+            Vector2 checkPosition = (Vector2)transform.position + offset;
 
-        var backBuildings = backHits
-            .Select(hit => hit.GetComponent<Building>())
-            .Where(b => b != null && b != this)
-            .ToList();
+            Vector2 boxSize = (kvp.Key == Direction.Up || kvp.Key == Direction.Down)
+                ? new Vector2(0.8f, 0.5f)
+                : new Vector2(0.5f, 0.8f);
 
-        Debug.Log($"Front Buildings: {frontBuildings.Count}");
-        Debug.Log($"Back Buildings: {backBuildings.Count}");
+            Collider2D[] hits = Physics2D.OverlapBoxAll(checkPosition, boxSize, 0f);
+
+            foreach (var hit in hits)
+            {
+                Building building = hit.GetComponent<Building>();
+                if (building != null && building != this)
+                {
+                    Debug.Log($"{kvp.Key} Building found: {building.name}");
+                    return true;
+                }
+            }
+
+            Debug.Log($"{kvp.Key} Building not found.");
+        }
+
+        return false;
     }
-    
+
     private void OnDrawGizmosSelected()
     {
-        Vector2 frontPosition = (Vector2)transform.position + (Vector2)transform.up * checkBoxSize.y;
-        Vector2 backPosition  = (Vector2)transform.position - (Vector2)transform.up * checkBoxSize.y;
-
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(frontPosition, checkBoxSize);
-        
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(backPosition, checkBoxSize);
+
+        Dictionary<Direction, Vector2> directionOffsets = new()
+        {
+            { Direction.Up,    (Vector2)transform.up * checkBoxSize.y },
+            { Direction.Down, -(Vector2)transform.up * checkBoxSize.y },
+            { Direction.Left, -(Vector2)transform.right * checkBoxSize.x },
+            { Direction.Right, (Vector2)transform.right * checkBoxSize.x }
+        };
+
+        foreach (var kvp in directionOffsets)
+        {
+            if ((checkDirections & kvp.Key) == 0) continue;
+
+            Vector2 checkPosition = (Vector2)transform.position + kvp.Value;
+            Vector2 boxSize = (kvp.Key == Direction.Up || kvp.Key == Direction.Down)
+                ? new Vector2(0.8f, 0.5f)
+                : new Vector2(0.5f, 0.8f);
+
+            Gizmos.DrawWireCube(checkPosition, boxSize);
+        }
     }
 }
