@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private RectTransform _cantBuildPanel;
     
     [SerializeField] TypewriterByCharacter _currentBuildingText;
+    [SerializeField] TypewriterByCharacter _currentBuildingVoltText;
     
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class UIController : MonoBehaviour
 
     public void SetCurrentBuildingText(string name)
     {
+        _currentBuildingText.ShowText($"Current Building:\n{name}");
         _currentBuildingText.ShowText($"Current Building:\n{name}");
     }
     

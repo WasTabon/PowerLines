@@ -9783,9 +9783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Volt: 5
-
-    Ampere: 5'
+  m_text: 'Volt: 5'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11921,6 +11919,7 @@ MonoBehaviour:
   _buildPanel: {fileID: 1706269744}
   _cantBuildPanel: {fileID: 184401701}
   _currentBuildingText: {fileID: 1398680297}
+  _currentBuildingVoltText: {fileID: 0}
 --- !u!4 &1996187945
 Transform:
   m_ObjectHideFlags: 0

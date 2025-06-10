@@ -18,7 +18,6 @@ public abstract class Building : MonoBehaviour
     public string name;
 
     [SerializeField] protected int _volt;
-    [SerializeField] protected int _amper;
 
     [SerializeField] protected Vector2 checkBoxSize;
     [SerializeField] protected Direction checkDirections = Direction.Up | Direction.Down;
@@ -26,7 +25,6 @@ public abstract class Building : MonoBehaviour
     private Building _building;
     
     public int Volt => _volt;
-    public int Amper => _amper;
 
     protected bool _isActive;
 
@@ -99,6 +97,11 @@ public abstract class Building : MonoBehaviour
             return true;
 
         return false;
+    }
+
+    public virtual void OnBuild()
+    {
+        Debug.Log("Placed");
     }
     
     private void OnDrawGizmosSelected()

@@ -47,6 +47,8 @@ public class BuildingController : MonoBehaviour
     
     public void BuildBuilding()
     {
+        _building.GetComponent<Building>().OnBuild();
+        
         _cell.SetBuilding(_building.GetComponent<Building>());
         _building = null;
         _cell = null;
