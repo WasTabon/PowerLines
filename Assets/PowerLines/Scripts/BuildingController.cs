@@ -64,9 +64,9 @@ public class BuildingController : MonoBehaviour
     {
         Vector3 spawnPos = new Vector3(cell.transform.position.x, cell.transform.position.y, -1f);
         _building = Instantiate(_currentBuilding.gameObject, spawnPos, _currentBuilding.transform.rotation);
-        bool isBuilding = _building.GetComponent<Building>().CheckBuildings();
+        bool isOverlapBuilding = _building.GetComponent<Building>().IsOverlapBuilding();
 
-        if (!isBuilding)
+        if (!isOverlapBuilding)
         {
             UIController.Instance.ShowBuildPanel();
         }

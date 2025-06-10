@@ -23,6 +23,8 @@ public abstract class Building : MonoBehaviour
     [SerializeField] protected Vector2 checkBoxSize;
     [SerializeField] protected Direction checkDirections = Direction.Up | Direction.Down;
 
+    private Building _building;
+    
     public int Volt => _volt;
     public int Amper => _amper;
 
@@ -33,8 +35,10 @@ public abstract class Building : MonoBehaviour
         _isActive = true;
     }
 
-    public bool CheckBuildings()
+    public bool IsOverlapBuilding()
     {
+        _building = null;
+        
         Dictionary<Direction, Vector2> directionOffsets = new()
         {
             { Direction.Up,    Vector2.up },
@@ -55,23 +59,48 @@ public abstract class Building : MonoBehaviour
                 : new Vector2(0.5f, 0.8f);
 
             Collider2D[] hits = Physics2D.OverlapBoxAll(checkPosition, boxSize, 0f);
-
+            
+            var buildings = hits
+                .Select(hit => hit.GetComponent<Building>())
+                .Where(building => building != null)
+                .ToArray();
+            
+            Debug.Log($"Hits number: {buildings.Length}");
+            
+            if (buildings.Length <= 1)
+            {
+                return CanBuild(_building);
+            }
+            
             foreach (var hit in hits)
             {
                 Building building = hit.GetComponent<Building>();
                 if (building != null && building != this)
                 {
-                    Debug.Log($"{kvp.Key} Building found: {building.name}");
-                    return true;
+                    _building = building;
                 }
             }
-
-            Debug.Log($"{kvp.Key} Building not found.");
         }
+
+        if (_building == null)
+        {
+            Debug.Log("Building is null");
+            return true;
+        }
+
+        return CanBuild(_building);
+    }
+
+    protected virtual bool CanBuild(Building building)
+    {
+        Debug.Log("Building");
+        
+        if (building != null)
+            return true;
 
         return false;
     }
-
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
