@@ -27,7 +27,7 @@ public abstract class Building : MonoBehaviour
     public int Volt => _volt;
 
     protected bool _isActive;
-
+    
     public void SetActive()
     {
         _isActive = true;
@@ -63,11 +63,9 @@ public abstract class Building : MonoBehaviour
                 .Where(building => building != null)
                 .ToArray();
             
-            Debug.Log($"Hits number: {buildings.Length}");
-            
             if (buildings.Length <= 1)
             {
-                return CanBuild(_building);
+                return CanBuild(buildings[0]);
             }
             
             foreach (var hit in hits)
