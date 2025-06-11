@@ -147,3 +147,17 @@ MonoBehaviour:
   _volt: 0
   checkBoxSize: {x: 1, y: 1}
   checkDirections: 6
+  allowedPrefabs:
+    _serializedList:
+    - Key: {fileID: 6262484591853359319, guid: d23da647c9c13be489aa6588a7543527, type: 3}
+      Value: -1
+    - Key: {fileID: 6976778380712611651, guid: d5b820a504b5524439c6cb648a791e3f, type: 3}
+      Value: 1
+    - Key: {fileID: 6976778380712611651, guid: a01e0c01a7784f24c85355fd9eec85ab, type: 3}
+      Value: 5
+    - Key: {fileID: 6976778380712611651, guid: 4e9b2bbef2d96cb4b95d796278eb08c2, type: 3}
+      Value: 4
+    - Key: {fileID: 6976778380712611651, guid: 97ea0973976340f4ba12c5d8c934778a, type: 3}
+      Value: 1
+    - Key: {fileID: 6976778380712611651, guid: 8c735df0738666047aca8a4a3674cfe7, type: 3}
+      Value: 4
