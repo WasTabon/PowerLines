@@ -62,10 +62,15 @@ public abstract class Building : MonoBehaviour
                 .Select(hit => hit.GetComponent<Building>())
                 .Where(building => building != null)
                 .ToArray();
+
+            foreach (Building building2 in buildings)
+            {
+                Debug.Log($"All overlap on {gameObject.name} - {building2.gameObject.name}", building2.gameObject);
+            }
             
             if (buildings.Length <= 1)
             {
-                return CanBuild(buildings[0]);
+                return CanBuild(null);
             }
             
             foreach (var hit in hits)
