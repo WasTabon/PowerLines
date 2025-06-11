@@ -6,20 +6,35 @@ public class Wire : Building
     [SerializedDictionary("Prefab", "Sides")]
     public SerializedDictionary<Building, Direction> allowedPrefabs;
 
-    protected override bool CanBuild(Building building)
+    protected override bool CanBuild(Building building, Direction direction)
     {
         if (building == null)
         {
-            Debug.Log("Building is null in wire");
+            Debug.Log("No neighbor – allow build?");
             return true;
         }
 
-        foreach (var prefab in allowedPrefabs.Keys)
+        foreach (var kvp in allowedPrefabs)
         {
-            if (building.GetType() == prefab.GetType())
+            Debug.Log($"In cycle: {kvp.Key.GetType().Name}, allowed dirs: {kvp.Value}");
+            Debug.Log($"Detected direction: {direction}");
+
+            if (building.GetType() == kvp.Key.GetType())
             {
-                _volt = building.Volt - 1;
-                return false;
+                Debug.Log("Type is good");
+                Direction allowedDir = kvp.Value;
+                
+                if ((allowedDir & direction) != 0)
+                {
+                    Debug.Log("Direction is valid");
+                    _volt = building.Volt - 1;
+                    return false;
+                }
+                else
+                {
+                    Debug.Log($"Invalid direction: {direction} not in {allowedDir}");
+                    return true;
+                }
             }
         }
 

@@ -50,13 +50,10 @@ public abstract class Building : MonoBehaviour
         };
 
         _building = null;
-        bool hasNeighbor = false;
 
         foreach (var kvp in directionOffsets)
         {
             if ((checkDirections & kvp.Key) == 0) continue;
-
-            Debug.Log($"Key: {kvp.Key}");
 
             Vector2 offset = kvp.Value * 0.5f;
             Vector2 checkPosition = (Vector2)transform.position + offset;
@@ -72,34 +69,34 @@ public abstract class Building : MonoBehaviour
                 .Where(building => building != null && building != this)
                 .ToArray();
 
-            foreach (Building buildingHit in buildings)
+            foreach (var buildingHit in buildings)
             {
-                Debug.Log($"Building: {buildingHit.gameObject.name}", buildingHit.gameObject);
-            }
-
-            if (buildings.Length > 0)
-            {
-                _building = buildings[0];
-                hasNeighbor = true;
+                Direction dirToNeighbor = GetDirectionToNeighbor(buildingHit.transform.position);
+                if (!CanBuild(buildingHit, dirToNeighbor)) return false;
             }
         }
 
-        if (!hasNeighbor)
-        {
-            Debug.Log("No buildings found in any direction");
-            return CanBuild(null);
-        }
-
-        Debug.Log($"Give building to CanBuild: {_building?.gameObject.name}", _building?.gameObject);
-        return CanBuild(_building);
+        return CanBuild(null, Direction.None);
     }
 
-    protected virtual bool CanBuild(Building building)
+    protected Direction GetDirectionToNeighbor(Vector2 neighborPosition)
     {
-        Debug.Log("Building");
-        
-        if (building != null)
-            return true;
+        Vector2 delta = neighborPosition - (Vector2)transform.position;
+
+        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+        {
+            return delta.x > 0 ? Direction.Right : Direction.Left;
+        }
+        else
+        {
+            return delta.y > 0 ? Direction.Up : Direction.Down;
+        }
+    }
+
+    
+    protected virtual bool CanBuild(Building building, Direction direction)
+    {
+        Debug.Log("True cant build False can built");
 
         return false;
     }

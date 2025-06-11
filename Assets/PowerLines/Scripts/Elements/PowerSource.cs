@@ -11,13 +11,6 @@ public class PowerSource : Building
     {
         _volt = amount;
     }
-    
-    protected override bool CanBuild(Building building)
-    {
-        Debug.Log("True cant build False can built");
-        
-        return false;
-    }
 
     public override void OnBuild()
     {
