@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3093426857571973994}
   - component: {fileID: 6976778380712611651}
   m_Layer: 0
-  m_Name: Wire
+  m_Name: WireLeftRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,4 +146,4 @@ MonoBehaviour:
   name: Wire
   _volt: 0
   checkBoxSize: {x: 1, y: 1}
-  checkDirections: 3
+  checkDirections: 12

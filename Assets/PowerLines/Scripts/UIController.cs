@@ -46,6 +46,20 @@ public class UIController : MonoBehaviour
     public void PopupCantBuildPanel()
     {
         _cantBuildPanel.DOKill();
+        
+        if (_cantBuildPanel.anchoredPosition.y > -10f)
+        {
+            _cantBuildPanel.localScale = Vector3.one;
+            _cantBuildPanel.DOPunchScale(Vector3.one * 0.25f, 0.3f, 10, 1)
+                .OnComplete((() =>
+                {
+                    if (_cantBuildPanel.localScale.x < 1 && _cantBuildPanel.localScale.y < 1)
+                    {
+                        _cantBuildPanel.DOScale(Vector3.one, 0.3f);
+                    }
+                }));
+        }
+        
         _cantBuildPanel.DOAnchorPosY(0f, 0.5f)
             .SetEase(Ease.InOutBack)
             .OnComplete((() =>

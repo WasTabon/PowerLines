@@ -1,12 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Wire : Building
 {
-    private void Awake()
-    {
-        checkDirections = Direction.Up | Direction.Down;
-    }
-    
+    [Header("Разрешённые типы построек (префабы)")]
+    [SerializeField] private List<Building> allowedPrefabs;
+
     protected override bool CanBuild(Building building)
     {
         if (building == null)
@@ -14,15 +13,16 @@ public class Wire : Building
             Debug.Log("Building is null in wire");
             return true;
         }
-        if (building is PowerSource || building is Wire)
+
+        foreach (var prefab in allowedPrefabs)
         {
-            Debug.Log("Building is no null", building.gameObject);
-            _volt = building.Volt - 1;
-            return false;
+            if (prefab != null && building.GetType() == prefab.GetType())
+            {
+                _volt = building.Volt - 1;
+                return false;
+            }
         }
 
-        Debug.Log("None");
-        
         return true;
     }
 
@@ -30,6 +30,5 @@ public class Wire : Building
     {
         Debug.Log("Builded wire");
     }
-    
-    //треба пофіксити то шо ставиться wire коли вокруг нема нічого
 }
+
