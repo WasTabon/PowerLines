@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class Wire : Building
 {
+    private void Awake()
+    {
+        checkDirections = Direction.Up | Direction.Down;
+    }
+    
     protected override bool CanBuild(Building building)
     {
         if (building == null)
         {
-            Debug.Log("Building is null");
+            Debug.Log("Building is null in wire");
             return true;
         }
         if (building is PowerSource || building is Wire)

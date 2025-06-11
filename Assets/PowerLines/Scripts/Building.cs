@@ -33,10 +33,14 @@ public abstract class Building : MonoBehaviour
         _isActive = true;
     }
 
+    public void ResetBuilding()
+    {
+        Debug.Log("Called reset");
+        _building = null;
+    }
+    
     public bool IsOverlapBuilding()
     {
-        _building = null;
-        
         Dictionary<Direction, Vector2> directionOffsets = new()
         {
             { Direction.Up,    Vector2.up },
@@ -49,6 +53,13 @@ public abstract class Building : MonoBehaviour
         {
             if ((checkDirections & kvp.Key) == 0) continue;
 
+            Debug.Log($"Key: {kvp.Key}");
+            
+            if (_building != null)
+            {
+                return CanBuild(_building);
+            }
+            
             Vector2 offset = kvp.Value * 0.5f;
             Vector2 checkPosition = (Vector2)transform.position + offset;
 
@@ -63,11 +74,11 @@ public abstract class Building : MonoBehaviour
                 .Where(building => building != null)
                 .ToArray();
 
-            foreach (Building building2 in buildings)
+            foreach (Building buildingHit in buildings)
             {
-                Debug.Log($"All overlap on {gameObject.name} - {building2.gameObject.name}", building2.gameObject);
+                Debug.Log($"Building: {buildingHit.gameObject.name}", buildingHit.gameObject);
             }
-            
+
             if (buildings.Length <= 1)
             {
                 return CanBuild(null);
@@ -79,16 +90,19 @@ public abstract class Building : MonoBehaviour
                 if (building != null && building != this)
                 {
                     _building = building;
+                    Debug.Log($"Building found: {_building.gameObject.name}", _building.gameObject);
                 }
             }
         }
 
         if (_building == null)
         {
-            Debug.Log("Building is null");
+            Debug.Log("Building is null in building");
             return true;
         }
 
+        Debug.Log($"Give building to can build: {_building.gameObject.name}", _building.gameObject);
+        
         return CanBuild(_building);
     }
 
