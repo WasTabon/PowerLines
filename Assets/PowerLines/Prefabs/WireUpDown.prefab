@@ -148,5 +148,8 @@ MonoBehaviour:
   checkBoxSize: {x: 1, y: 1}
   checkDirections: 3
   allowedPrefabs:
-  - {fileID: 6262484591853359319, guid: d23da647c9c13be489aa6588a7543527, type: 3}
-  - {fileID: 6976778380712611651}
+    _serializedList:
+    - Key: {fileID: 6262484591853359319, guid: d23da647c9c13be489aa6588a7543527, type: 3}
+      Value: -1
+    - Key: {fileID: 6976778380712611651}
+      Value: 3

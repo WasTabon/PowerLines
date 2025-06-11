@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 public class Wire : Building
 {
-    [Header("Разрешённые типы построек (префабы)")]
-    [SerializeField] private List<Building> allowedPrefabs;
+    [SerializedDictionary("Prefab", "Sides")]
+    public SerializedDictionary<Building, Direction> allowedPrefabs;
 
     protected override bool CanBuild(Building building)
     {
@@ -14,9 +14,9 @@ public class Wire : Building
             return true;
         }
 
-        foreach (var prefab in allowedPrefabs)
+        foreach (var prefab in allowedPrefabs.Keys)
         {
-            if (prefab != null && building.GetType() == prefab.GetType())
+            if (building.GetType() == prefab.GetType())
             {
                 _volt = building.Volt - 1;
                 return false;
