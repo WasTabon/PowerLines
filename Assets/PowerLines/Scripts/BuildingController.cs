@@ -66,6 +66,7 @@
         {
             Vector3 spawnPos = new Vector3(cell.transform.position.x, cell.transform.position.y, -1f);
             _building = Instantiate(_currentBuilding.gameObject, spawnPos, _currentBuilding.transform.rotation);
+            _building.gameObject.name = _currentBuilding.gameObject.name;
             _building.GetComponent<Building>().ResetBuilding();
             bool isOverlapBuilding = _building.GetComponent<Building>().IsOverlapBuilding();
 

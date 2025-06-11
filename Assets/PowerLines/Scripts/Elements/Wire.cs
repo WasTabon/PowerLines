@@ -5,7 +5,7 @@ public class Wire : Building
 {
     [SerializedDictionary("Prefab", "Sides")]
     public SerializedDictionary<Building, Direction> allowedPrefabs;
-
+    
     protected override bool CanBuild(Building building, Direction direction)
     {
         if (building == null)
@@ -14,31 +14,37 @@ public class Wire : Building
             return true;
         }
 
+        bool matchedType = false;
+
         foreach (var kvp in allowedPrefabs)
         {
-            Debug.Log($"In cycle: {kvp.Key.GetType().Name}, allowed dirs: {kvp.Value}");
-            Debug.Log($"Detected direction: {direction}");
-
-            if (building.GetType() == kvp.Key.GetType())
+            if (building.gameObject.name == kvp.Key.gameObject.name)
             {
-                Debug.Log("Type is good");
-                Direction allowedDir = kvp.Value;
-                
-                if ((allowedDir & direction) != 0)
+                matchedType = true;
+                Debug.Log($"Matched type: {kvp.Key.GetType().Name}, allowed dirs: {kvp.Value}");
+                Debug.Log($"Detected direction: {direction}");
+
+                if ((kvp.Value & direction) != 0)
                 {
                     Debug.Log("Direction is valid");
                     _volt = building.Volt - 1;
-                    return false;
+                    matchedType = true;
+                    //return false; // ❌ запрещаем строить (как у тебя задумано)
                 }
-                else
-                {
-                    Debug.Log($"Invalid direction: {direction} not in {allowedDir}");
-                    return true;
-                }
+            }
+            else
+            {
+                Debug.Log("Building is missing in dictionary");
             }
         }
 
-        return true;
+        if (matchedType)
+        {
+            Debug.Log("Type matched");
+            return false; // ❌ тип был, но направление не совпало — запрещаем
+        }
+
+        return true; // тип вообще не найден — можно строить?
     }
 
     public override void OnBuild()
