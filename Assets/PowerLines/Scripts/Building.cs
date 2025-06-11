@@ -49,17 +49,15 @@ public abstract class Building : MonoBehaviour
             { Direction.Right, Vector2.right }
         };
 
+        _building = null;
+        bool hasNeighbor = false;
+
         foreach (var kvp in directionOffsets)
         {
             if ((checkDirections & kvp.Key) == 0) continue;
 
             Debug.Log($"Key: {kvp.Key}");
-            
-            if (_building != null)
-            {
-                return CanBuild(_building);
-            }
-            
+
             Vector2 offset = kvp.Value * 0.5f;
             Vector2 checkPosition = (Vector2)transform.position + offset;
 
@@ -68,10 +66,10 @@ public abstract class Building : MonoBehaviour
                 : new Vector2(0.5f, 0.8f);
 
             Collider2D[] hits = Physics2D.OverlapBoxAll(checkPosition, boxSize, 0f);
-            
+
             var buildings = hits
                 .Select(hit => hit.GetComponent<Building>())
-                .Where(building => building != null)
+                .Where(building => building != null && building != this)
                 .ToArray();
 
             foreach (Building buildingHit in buildings)
@@ -79,30 +77,20 @@ public abstract class Building : MonoBehaviour
                 Debug.Log($"Building: {buildingHit.gameObject.name}", buildingHit.gameObject);
             }
 
-            if (buildings.Length <= 1)
+            if (buildings.Length > 0)
             {
-                return CanBuild(null);
-            }
-            
-            foreach (var hit in hits)
-            {
-                Building building = hit.GetComponent<Building>();
-                if (building != null && building != this)
-                {
-                    _building = building;
-                    Debug.Log($"Building found: {_building.gameObject.name}", _building.gameObject);
-                }
+                _building = buildings[0];
+                hasNeighbor = true;
             }
         }
 
-        if (_building == null)
+        if (!hasNeighbor)
         {
-            Debug.Log("Building is null in building");
-            return true;
+            Debug.Log("No buildings found in any direction");
+            return CanBuild(null);
         }
 
-        Debug.Log($"Give building to can build: {_building.gameObject.name}", _building.gameObject);
-        
+        Debug.Log($"Give building to CanBuild: {_building?.gameObject.name}", _building?.gameObject);
         return CanBuild(_building);
     }
 
