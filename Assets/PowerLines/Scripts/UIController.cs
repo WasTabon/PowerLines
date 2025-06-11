@@ -23,10 +23,10 @@ public class UIController : MonoBehaviour
         _cantBuildPanel.DOAnchorPosY(-240f, 0);
     }
 
-    public void SetCurrentBuildingText(string name)
+    public void SetCurrentBuildingText(string name, string volt)
     {
         _currentBuildingText.ShowText($"Current Building:\n{name}");
-        _currentBuildingText.ShowText($"Current Building:\n{name}");
+        _currentBuildingVoltText.ShowText($"Volt: {volt}");
     }
     
     public void ShowBuildPanel()

@@ -86,13 +86,14 @@
         {
             var building = cell.GetBuilding();
             string name = building.name;
+            string volt = building.Volt.ToString();
             Transform bTransform = building.gameObject.transform;
 
             bTransform.localScale = Vector3.one;
             bTransform.DOPunchScale(Vector3.one * 0.35f, 0.4f, 10, 1)
                 .OnStart(() =>
                 {
-                    UIController.Instance.SetCurrentBuildingText(name);
+                    UIController.Instance.SetCurrentBuildingText(name, volt);
                 })
                 .OnComplete((() =>
                 {

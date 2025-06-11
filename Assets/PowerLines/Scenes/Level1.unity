@@ -12187,7 +12187,7 @@ MonoBehaviour:
   _buildPanel: {fileID: 1706269744}
   _cantBuildPanel: {fileID: 184401701}
   _currentBuildingText: {fileID: 1398680297}
-  _currentBuildingVoltText: {fileID: 0}
+  _currentBuildingVoltText: {fileID: 1650683815}
 --- !u!4 &1996187945
 Transform:
   m_ObjectHideFlags: 0

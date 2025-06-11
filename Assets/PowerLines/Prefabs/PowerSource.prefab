@@ -144,6 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Power Source
-  _volt: 0
+  _volt: 10
   checkBoxSize: {x: 1, y: 1}
   checkDirections: -1
