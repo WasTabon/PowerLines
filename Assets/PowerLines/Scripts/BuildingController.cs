@@ -17,6 +17,7 @@ using DG.Tweening;
         private void Awake()
         {
             PowerSource powerSource = Instantiate(_powerSourceStartGame.gameObject, _cellStartGame.gameObject.transform.localPosition, _powerSourceStartGame.gameObject.transform.localRotation).GetComponent<PowerSource>();
+            powerSource.gameObject.name = "PowerSource";
             powerSource.SetVolt(_startVolt);
             _cellStartGame._building = powerSource;
         }
@@ -24,6 +25,7 @@ using DG.Tweening;
         private void Start()
         {
             InputHandler.OnTap += HandleTap;
+            ClickOnBuilding(_cellStartGame);
         }
         
         public void SetCurrentBuilding(Building building)
@@ -83,17 +85,17 @@ using DG.Tweening;
             _building.gameObject.name = _currentBuilding.gameObject.name;
             _building.GetComponent<Building>().ResetBuilding();
             bool isOverlapBuilding = _building.GetComponent<Building>().IsOverlapBuilding();
-
-            if (_building.GetComponent<Building>().Volt <= 0)
+            
+            if (!isOverlapBuilding && _building.GetComponent<Building>().Volt > 0)
+            {
+                UIController.Instance.ShowBuildPanel();
+            }
+            else if (_building.GetComponent<Building>().Volt <= 0 && !isOverlapBuilding)
             {
                 UIController.Instance.PopupVoltTooLowPanel();
                 Destroy(_building);
                 _building = null;
                 _cell = null;
-            }
-            else if (!isOverlapBuilding)
-            {
-                UIController.Instance.ShowBuildPanel();
             }
             else
             {

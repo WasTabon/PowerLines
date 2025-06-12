@@ -157,6 +157,8 @@ MonoBehaviour:
       Value: 8
     - Key: {fileID: 6976778380712611651, guid: 6d20432970796e14f9fa928cd0fe7c41, type: 3}
       Value: 2
+    - Key: {fileID: 6976778380712611651, guid: 97ea0973976340f4ba12c5d8c934778a, type: 3}
+      Value: 2
     - Key: {fileID: 6976778380712611651, guid: 8c735df0738666047aca8a4a3674cfe7, type: 3}
       Value: 6
     - Key: {fileID: 6976778380712611651, guid: a01e0c01a7784f24c85355fd9eec85ab, type: 3}
