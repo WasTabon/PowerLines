@@ -1,11 +1,22 @@
 using DG.Tweening;
 using Febucci.UI;
+using PowerLines.Scripts;
 using TMPro;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
     public static UIController Instance { get; private set; }
+
+    [SerializeField] private RectTransform _winPanel;
+    [SerializeField] private RectTransform _star1;
+    [SerializeField] private RectTransform _star2;
+    [SerializeField] private RectTransform _star3;
+    [SerializeField] private RectTransform _continueButton;
+    
+    [SerializeField] private AudioClip _winPanelSound;
+    [SerializeField] private AudioClip _starSound;
+    [SerializeField] private AudioClip _continueButtonSound;
     
     [SerializeField] private RectTransform _buildPanel;
     [SerializeField] private RectTransform _cantBuildPanel;
@@ -31,12 +42,60 @@ public class UIController : MonoBehaviour
         _buildPanel.DOAnchorPosY(-240f, 0);
         _cantBuildPanel.DOAnchorPosY(-240f, 0);
         _voltTooLowPanel.DOAnchorPosY(-240f, 0);
+        
+        _winPanel.localScale = Vector3.zero;
+        _star1.localScale = Vector3.zero;
+        _star2.localScale = Vector3.zero;
+        _star3.localScale = Vector3.zero;
+        _continueButton.localScale = Vector3.zero;
+        _continueButton.gameObject.SetActive(false);
     }
 
     public void SetCurrentBuildingText(string name, string volt)
     {
         _currentBuildingText.ShowText($"Current Building:\n{name}");
         _currentBuildingVoltText.ShowText($"Volt: {volt}");
+    }
+
+    public void ShowWinPanel()
+    {
+        _winPanel.gameObject.SetActive(true);
+        _winPanel.DOScale(Vector3.one, 0.5f)
+            .SetEase(Ease.OutBack)
+            .OnStart(() =>
+            {
+                TryPlaySound(_winPanelSound);
+            })
+            .OnComplete(() =>
+            {
+                _star1.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
+                    .OnStart(() => TryPlaySound(_starSound))
+                    .OnComplete(() =>
+                    {
+                        _star2.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
+                            .OnStart(() => TryPlaySound(_starSound))
+                            .OnComplete(() =>
+                            {
+                                _star3.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
+                                    .OnStart(() => TryPlaySound(_starSound))
+                                    .OnComplete(() =>
+                                    {
+                                        _continueButton.gameObject.SetActive(true);
+                                        _continueButton.DOScale(Vector3.one, 0.4f)
+                                            .SetEase(Ease.OutBack)
+                                            .OnStart(() => TryPlaySound(_continueButtonSound));
+                                    });
+                            });
+                    });
+            });
+    }
+
+    private void TryPlaySound(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            MusicController.Instance.PlaySpecificSound(clip);
+        }
     }
     
     public void ShowBuildPanel()

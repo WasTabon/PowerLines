@@ -5,9 +5,12 @@ using DG.Tweening;
     {
         [SerializeField] private int _startVolt;
         [SerializeField] private Cell _cellStartGame;
+        [SerializeField] private Cell _cellFactory;
         [SerializeField] private PowerSource _powerSourceStartGame;
+        [SerializeField] private Consumer _consumer;
         
         private Building _currentBuilding;
+        private Consumer _buildedConsumer;
 
         [SerializeField] private LayerMask cellLayerMask; 
         
@@ -20,6 +23,11 @@ using DG.Tweening;
             powerSource.gameObject.name = "PowerSource";
             powerSource.SetVolt(_startVolt);
             _cellStartGame._building = powerSource;
+            
+            Consumer consumer = Instantiate(_consumer.gameObject, _cellFactory.gameObject.transform.localPosition, _consumer.gameObject.transform.localRotation).GetComponent<Consumer>();
+            consumer.gameObject.name = "Consumer";
+            _cellFactory._building = consumer;
+            _buildedConsumer = consumer;
         }
 
         private void Start()
@@ -53,7 +61,8 @@ using DG.Tweening;
                 }
                 else
                 {
-                    ClickOnBuilding(cell);
+                    if (cell._building is not Consumer)
+                        ClickOnBuilding(cell);
                 }
             }
         }
@@ -69,6 +78,7 @@ using DG.Tweening;
             _building = null;
             _cell = null;
             UIController.Instance.HideBuildPanel();
+            _consumer.GetComponent<BoxCollider2D>().enabled = true;
         }
         public void DenyBuild()
         {
@@ -76,10 +86,12 @@ using DG.Tweening;
             _building = null;
             _cell = null;
             UIController.Instance.HideBuildPanel();
+            _consumer.GetComponent<BoxCollider2D>().enabled = true;
         }
 
         private void PlaceBuilding(Cell cell)
         {
+            _consumer.GetComponent<BoxCollider2D>().enabled = false;
             Vector3 spawnPos = new Vector3(cell.transform.position.x, cell.transform.position.y, -1f);
             _building = Instantiate(_currentBuilding.gameObject, spawnPos, _currentBuilding.transform.rotation);
             _building.gameObject.name = _currentBuilding.gameObject.name;
@@ -96,6 +108,7 @@ using DG.Tweening;
                 Destroy(_building);
                 _building = null;
                 _cell = null;
+                _consumer.GetComponent<BoxCollider2D>().enabled = true;
             }
             else
             {
@@ -103,6 +116,7 @@ using DG.Tweening;
                 Destroy(_building);
                 _building = null;
                 _cell = null;
+                _consumer.GetComponent<BoxCollider2D>().enabled = true;
             }
         }
 

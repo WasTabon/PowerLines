@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2048035076890687398}
   - component: {fileID: 3180260736812629244}
   - component: {fileID: 3093426857571973994}
-  - component: {fileID: 6976778380712611651}
+  - component: {fileID: 8932361250748649470}
+  - component: {fileID: 4229167394564450202}
   m_Layer: 0
-  m_Name: WireLeftRight
+  m_Name: Consumer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d10ea4bee4349b944a0e09fd13ebb42e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff99739f99819fc4687b31348f8b141d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -129,9 +130,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &6976778380712611651
+--- !u!114 &8932361250748649470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,28 +141,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 5032944226812752155}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51bd8e4a2f5867b439c60793d5edef2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efbf3f631445444cbc128e658fae8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Wire
+  name: Consumer
   _volt: 0
-  checkBoxSize: {x: 1, y: 1}
-  checkDirections: 12
-  allowedPrefabs:
-    _serializedList:
-    - Key: {fileID: 6262484591853359319, guid: d23da647c9c13be489aa6588a7543527, type: 3}
-      Value: -1
-    - Key: {fileID: 7943237753739317810, guid: 42e3d699fed31c842a8f21d09f3b5f16, type: 3}
-      Value: -1
-    - Key: {fileID: 6976778380712611651, guid: d5b820a504b5524439c6cb648a791e3f, type: 3}
-      Value: 8
-    - Key: {fileID: 6976778380712611651, guid: 6d20432970796e14f9fa928cd0fe7c41, type: 3}
-      Value: 8
-    - Key: {fileID: 6976778380712611651, guid: a01e0c01a7784f24c85355fd9eec85ab, type: 3}
-      Value: 4
-    - Key: {fileID: 6976778380712611651, guid: 8c735df0738666047aca8a4a3674cfe7, type: 3}
-      Value: 4
-    - Key: {fileID: 4384079179614482619, guid: 93756eb9aca995041a34cfbb97500279, type: 3}
-      Value: 12
-    - Key: {fileID: 6976778380712611651}
-      Value: 12
+  checkBoxSize: {x: 0, y: 0}
+  checkDirections: -1
+--- !u!50 &4229167394564450202
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5032944226812752155}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
