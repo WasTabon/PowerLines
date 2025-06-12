@@ -3,6 +3,8 @@ using DG.Tweening;
 
     public class BuildingController : MonoBehaviour
     {
+        [SerializeField] private GameObject _placeParticle;
+        
         [SerializeField] private int _startVolt;
         [SerializeField] private Cell _cellStartGame;
         [SerializeField] private Cell _cellFactory;
@@ -74,6 +76,8 @@ using DG.Tweening;
             _cell.SetBuilding(_building.GetComponent<Building>());
             
             ClickOnBuilding(_cell);
+
+            Instantiate(_placeParticle, _building.gameObject.transform.position, Quaternion.identity);
             
             _building = null;
             _cell = null;
