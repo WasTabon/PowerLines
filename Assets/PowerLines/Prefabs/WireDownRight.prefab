@@ -151,6 +151,8 @@ MonoBehaviour:
     _serializedList:
     - Key: {fileID: 6262484591853359319, guid: d23da647c9c13be489aa6588a7543527, type: 3}
       Value: -1
+    - Key: {fileID: 7943237753739317810, guid: 42e3d699fed31c842a8f21d09f3b5f16, type: 3}
+      Value: -1
     - Key: {fileID: 6976778380712611651, guid: d5b820a504b5524439c6cb648a791e3f, type: 3}
       Value: 10
     - Key: {fileID: 6976778380712611651, guid: 4e9b2bbef2d96cb4b95d796278eb08c2, type: 3}

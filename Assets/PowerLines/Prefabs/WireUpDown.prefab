@@ -151,6 +151,8 @@ MonoBehaviour:
     _serializedList:
     - Key: {fileID: 6262484591853359319, guid: d23da647c9c13be489aa6588a7543527, type: 3}
       Value: -1
+    - Key: {fileID: 7943237753739317810, guid: 42e3d699fed31c842a8f21d09f3b5f16, type: 3}
+      Value: -1
     - Key: {fileID: 6976778380712611651}
       Value: 3
     - Key: {fileID: 6976778380712611651, guid: 6d20432970796e14f9fa928cd0fe7c41, type: 3}
@@ -158,6 +160,6 @@ MonoBehaviour:
     - Key: {fileID: 6976778380712611651, guid: 8c735df0738666047aca8a4a3674cfe7, type: 3}
       Value: 2
     - Key: {fileID: 6976778380712611651, guid: a01e0c01a7784f24c85355fd9eec85ab, type: 3}
-      Value: 2
+      Value: 0
     - Key: {fileID: 6976778380712611651, guid: d5b820a504b5524439c6cb648a791e3f, type: 3}
-      Value: 2
+      Value: 0

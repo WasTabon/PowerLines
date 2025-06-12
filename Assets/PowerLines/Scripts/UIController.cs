@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Febucci.UI;
+using TMPro;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
@@ -12,6 +13,8 @@ public class UIController : MonoBehaviour
     
     [SerializeField] TypewriterByCharacter _currentBuildingText;
     [SerializeField] TypewriterByCharacter _voltText;
+    [SerializeField] TextMeshProUGUI _voltTextTMP;
+    [SerializeField] TextMeshProUGUI _currentVoltText;
     [SerializeField] TypewriterByCharacter _currentBuildingVoltText;
 
     private int _voltage;
@@ -52,8 +55,12 @@ public class UIController : MonoBehaviour
     {
         _transformer = transformer;
         _voltage = 5;
-        _voltPanel.gameObject.SetActive(true);
+        _voltTextTMP.text = "";
         _voltPanel.DOScale(Vector3.zero, 0f)
+            .OnStart((() =>
+            {
+                _voltPanel.gameObject.SetActive(true);
+            }))
             .OnComplete((() =>
             {
                 _voltPanel.DOScale(Vector3.one, 0.5f)
@@ -81,6 +88,8 @@ public class UIController : MonoBehaviour
         if (_voltage < 10)
         {
             _voltage++;
+            _voltTextTMP.text = ($"Current volt: {_voltage}");
+            _currentVoltText.text = ($"{_voltage}");
         }
     }
 
@@ -89,6 +98,8 @@ public class UIController : MonoBehaviour
         if (_voltage > 1)
         {
             _voltage--;
+            _voltTextTMP.text = ($"Current volt: {_voltage}");
+            _currentVoltText.text = ($"{_voltage}");
         }
     }
     
