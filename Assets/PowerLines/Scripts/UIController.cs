@@ -8,6 +8,9 @@ public class UIController : MonoBehaviour
 {
     public static UIController Instance { get; private set; }
 
+    [SerializeField] private RectTransform _muchElectricityPanel;
+    [SerializeField] private RectTransform _noElectricityPanel;
+    
     [SerializeField] private RectTransform _winPanel;
     [SerializeField] private RectTransform _star1;
     [SerializeField] private RectTransform _star2;
@@ -110,6 +113,15 @@ public class UIController : MonoBehaviour
                 });
         });
 }
+
+    public void ShowTooMuch()
+    {
+        _muchElectricityPanel.gameObject.SetActive(true);
+    }
+    public void ShowNo()
+    {
+        _noElectricityPanel.gameObject.SetActive(true);
+    }
 
     private void TryPlaySound(AudioClip clip)
     {

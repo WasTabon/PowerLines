@@ -6,10 +6,17 @@ public class Consumer : Building
     {
         if (coll.gameObject.TryGetComponent(out Building building))
         {
-            UIController.Instance.ShowWinPanel();
             if (building.Volt == 5)
             {
-                //UIController.Instance.ShowWinPanel();
+                UIController.Instance.ShowWinPanel();
+            }
+            else if (building.Volt > 5)
+            {
+                UIController.Instance.ShowTooMuch();
+            }
+            else
+            {
+                UIController.Instance.ShowNo();
             }
         }
     }
