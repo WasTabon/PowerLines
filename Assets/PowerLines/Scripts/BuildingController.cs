@@ -50,6 +50,9 @@
             _building.GetComponent<Building>().OnBuild();
             
             _cell.SetBuilding(_building.GetComponent<Building>());
+            
+            ClickOnBuilding(_cell);
+            
             _building = null;
             _cell = null;
             UIController.Instance.HideBuildPanel();
@@ -70,7 +73,14 @@
             _building.GetComponent<Building>().ResetBuilding();
             bool isOverlapBuilding = _building.GetComponent<Building>().IsOverlapBuilding();
 
-            if (!isOverlapBuilding)
+            if (_building.GetComponent<Building>().Volt <= 0)
+            {
+                UIController.Instance.PopupVoltTooLowPanel();
+                Destroy(_building);
+                _building = null;
+                _cell = null;
+            }
+            else if (!isOverlapBuilding)
             {
                 UIController.Instance.ShowBuildPanel();
             }

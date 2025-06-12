@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private RectTransform _buildPanel;
     [SerializeField] private RectTransform _cantBuildPanel;
     [SerializeField] private RectTransform _voltPanel;
+    [SerializeField] private RectTransform _voltTooLowPanel;
     
     [SerializeField] TypewriterByCharacter _currentBuildingText;
     [SerializeField] TypewriterByCharacter _voltText;
@@ -29,6 +30,7 @@ public class UIController : MonoBehaviour
     {
         _buildPanel.DOAnchorPosY(-240f, 0);
         _cantBuildPanel.DOAnchorPosY(-240f, 0);
+        _voltTooLowPanel.DOAnchorPosY(-240f, 0);
     }
 
     public void SetCurrentBuildingText(string name, string volt)
@@ -125,6 +127,33 @@ public class UIController : MonoBehaviour
             .OnComplete((() =>
             {
                 _cantBuildPanel.DOAnchorPosY(-240f, 0.5f)
+                    .SetDelay(0.5f)
+                    .SetEase(Ease.InOutBack);
+            }));
+    }
+    
+    public void PopupVoltTooLowPanel()
+    {
+        _voltTooLowPanel.DOKill();
+        
+        if (_voltTooLowPanel.anchoredPosition.y > -10f)
+        {
+            _voltTooLowPanel.localScale = Vector3.one;
+            _voltTooLowPanel.DOPunchScale(Vector3.one * 0.25f, 0.3f, 10, 1)
+                .OnComplete((() =>
+                {
+                    if (_voltTooLowPanel.localScale.x < 1 && _voltTooLowPanel.localScale.y < 1)
+                    {
+                        _voltTooLowPanel.DOScale(Vector3.one, 0.3f);
+                    }
+                }));
+        }
+        
+        _voltTooLowPanel.DOAnchorPosY(0f, 0.5f)
+            .SetEase(Ease.InOutBack)
+            .OnComplete((() =>
+            {
+                _voltTooLowPanel.DOAnchorPosY(-240f, 0.5f)
                     .SetDelay(0.5f)
                     .SetEase(Ease.InOutBack);
             }));
