@@ -29,7 +29,6 @@ public class Wire : Building
                     Debug.Log("Direction is valid");
                     _volt = building.Volt - 1;
                     matchedType = true;
-                    //return false; // ❌ запрещаем строить (как у тебя задумано)
                 }
             }
             else
@@ -41,10 +40,10 @@ public class Wire : Building
         if (matchedType)
         {
             Debug.Log("Type matched");
-            return false; // ❌ тип был, но направление не совпало — запрещаем
+            return false;
         }
 
-        return true; // тип вообще не найден — можно строить?
+        return true;
     }
 
     public override void OnBuild()

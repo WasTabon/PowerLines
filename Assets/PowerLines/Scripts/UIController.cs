@@ -8,8 +8,10 @@ public class UIController : MonoBehaviour
     
     [SerializeField] private RectTransform _buildPanel;
     [SerializeField] private RectTransform _cantBuildPanel;
+    [SerializeField] private RectTransform _voltPanel;
     
     [SerializeField] TypewriterByCharacter _currentBuildingText;
+    [SerializeField] TypewriterByCharacter _voltText;
     [SerializeField] TypewriterByCharacter _currentBuildingVoltText;
     
     private void Awake()
@@ -41,6 +43,11 @@ public class UIController : MonoBehaviour
         _buildPanel.DOKill();
         _buildPanel.DOAnchorPosY(-240f, 0.5f)
             .SetEase(Ease.InOutBack);
+    }
+
+    public void ShowVoltPanel(Transformer transformer)
+    {
+        
     }
     
     public void PopupCantBuildPanel()
