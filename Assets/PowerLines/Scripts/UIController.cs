@@ -116,11 +116,17 @@ public class UIController : MonoBehaviour
 
     public void ShowTooMuch()
     {
-        _muchElectricityPanel.gameObject.SetActive(true);
+        DOVirtual.DelayedCall(3f, () =>
+        {
+            _muchElectricityPanel.gameObject.SetActive(true);
+        });
     }
     public void ShowNo()
     {
-        _noElectricityPanel.gameObject.SetActive(true);
+        DOVirtual.DelayedCall(3f, () =>
+        {
+            _noElectricityPanel.gameObject.SetActive(true);
+        });
     }
 
     private void TryPlaySound(AudioClip clip)

@@ -113,7 +113,7 @@ using DG.Tweening;
                 _cell = null;
                 _consumer.GetComponent<BoxCollider2D>().enabled = true;
             }
-            else
+            else if (isOverlapBuilding)
             {
                 UIController.Instance.PopupCantBuildPanel();
                 Destroy(_building);
