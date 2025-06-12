@@ -1,15 +1,26 @@
-    using DG.Tweening;
+using DG.Tweening;
     using UnityEngine;
 
     public class BuildingController : MonoBehaviour
     {
+        [SerializeField] private int _startVolt;
+        [SerializeField] private Cell _cellStartGame;
+        [SerializeField] private PowerSource _powerSourceStartGame;
+        
         private Building _currentBuilding;
 
         [SerializeField] private LayerMask cellLayerMask; 
         
         private GameObject _building;
         private Cell _cell;
-        
+
+        private void Awake()
+        {
+            PowerSource powerSource = Instantiate(_powerSourceStartGame.gameObject, _cellStartGame.gameObject.transform.localPosition, _powerSourceStartGame.gameObject.transform.localRotation).GetComponent<PowerSource>();
+            powerSource.SetVolt(_startVolt);
+            _cellStartGame._building = powerSource;
+        }
+
         private void Start()
         {
             InputHandler.OnTap += HandleTap;

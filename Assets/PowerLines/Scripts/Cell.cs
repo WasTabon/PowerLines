@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    private Building _building;
+    public Building _building;
     
     public void SetBuilding(Building building) => _building = building;
 
