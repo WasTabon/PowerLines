@@ -13,6 +13,9 @@ public class UIController : MonoBehaviour
     [SerializeField] TypewriterByCharacter _currentBuildingText;
     [SerializeField] TypewriterByCharacter _voltText;
     [SerializeField] TypewriterByCharacter _currentBuildingVoltText;
+
+    private int _voltage;
+    private Transformer _transformer;
     
     private void Awake()
     {
@@ -47,7 +50,46 @@ public class UIController : MonoBehaviour
 
     public void ShowVoltPanel(Transformer transformer)
     {
-        
+        _transformer = transformer;
+        _voltage = 5;
+        _voltPanel.gameObject.SetActive(true);
+        _voltPanel.DOScale(Vector3.zero, 0f)
+            .OnComplete((() =>
+            {
+                _voltPanel.DOScale(Vector3.one, 0.5f)
+                    .SetEase(Ease.InOutBack)
+                    .OnComplete(() =>
+                    {
+                        _voltText.ShowText($"Current volt: {transformer.Volt}");
+                    });
+            }));
+    }
+
+    public void SetVoltage()
+    {
+        _transformer.SetVolt(_voltage);
+        _voltPanel.DOScale(Vector3.zero, 0.5f)
+            .SetEase(Ease.InOutBack)
+            .OnComplete(() =>
+            {
+                _voltPanel.gameObject.SetActive(false);
+            });
+    }
+
+    public void AddVolt()
+    {
+        if (_voltage < 10)
+        {
+            _voltage++;
+        }
+    }
+
+    public void TakeVolt()
+    {
+        if (_voltage > 1)
+        {
+            _voltage--;
+        }
     }
     
     public void PopupCantBuildPanel()

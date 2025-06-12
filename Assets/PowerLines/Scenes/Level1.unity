@@ -2451,7 +2451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &376356407
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14720,9 +14720,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildPanel: {fileID: 1706269744}
   _cantBuildPanel: {fileID: 184401701}
-  _voltPanel: {fileID: 0}
+  _voltPanel: {fileID: 376356407}
   _currentBuildingText: {fileID: 1398680297}
-  _voltText: {fileID: 0}
+  _voltText: {fileID: 1212649621}
   _currentBuildingVoltText: {fileID: 1650683815}
 --- !u!4 &1996187945
 Transform:

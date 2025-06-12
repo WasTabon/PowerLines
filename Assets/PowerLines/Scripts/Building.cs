@@ -38,6 +38,11 @@ public abstract class Building : MonoBehaviour
         Debug.Log("Called reset");
         _building = null;
     }
+
+    public void SetVolt(int amount)
+    {
+        _volt = amount;
+    }
     
     public bool IsOverlapBuilding()
     {

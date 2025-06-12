@@ -28,6 +28,7 @@ public class Transformer : Building
                 {
                     Debug.Log("Direction is valid");
                     _volt = building.Volt;
+                    UIController.Instance.ShowVoltPanel(this);
                     matchedType = true;
                 }
             }
