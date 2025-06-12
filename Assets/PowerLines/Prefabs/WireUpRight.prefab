@@ -163,3 +163,5 @@ MonoBehaviour:
       Value: 1
     - Key: {fileID: 6976778380712611651, guid: 6d20432970796e14f9fa928cd0fe7c41, type: 3}
       Value: 8
+    - Key: {fileID: 4384079179614482619, guid: 93756eb9aca995041a34cfbb97500279, type: 3}
+      Value: 8
