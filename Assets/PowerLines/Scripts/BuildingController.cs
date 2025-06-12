@@ -91,7 +91,6 @@ using DG.Tweening;
 
         private void PlaceBuilding(Cell cell)
         {
-            _consumer.GetComponent<BoxCollider2D>().enabled = false;
             Vector3 spawnPos = new Vector3(cell.transform.position.x, cell.transform.position.y, -1f);
             _building = Instantiate(_currentBuilding.gameObject, spawnPos, _currentBuilding.transform.rotation);
             _building.gameObject.name = _currentBuilding.gameObject.name;

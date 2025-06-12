@@ -577,6 +577,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2123,6 +2127,10 @@ PrefabInstance:
     - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
       propertyPath: m_Name
       value: Cell
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8298,7 +8306,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9639,6 +9647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10166,6 +10178,10 @@ PrefabInstance:
     - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
       propertyPath: m_Name
       value: Cell
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10939,6 +10955,10 @@ PrefabInstance:
     - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
       propertyPath: m_Name
       value: Cell
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11890,6 +11910,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12284,6 +12308,10 @@ PrefabInstance:
     - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
       propertyPath: m_Name
       value: Cell
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14462,6 +14490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16298,6 +16330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17644,6 +17680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18504,6 +18544,7 @@ MonoBehaviour:
   _star2: {fileID: 783401496}
   _star3: {fileID: 1467147423}
   _continueButton: {fileID: 593124262}
+  _winText: {fileID: 1014650552}
   _winPanelSound: {fileID: 0}
   _starSound: {fileID: 0}
   _continueButtonSound: {fileID: 0}
@@ -18908,6 +18949,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19280,6 +19325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19465,6 +19514,10 @@ PrefabInstance:
     - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
       propertyPath: m_Name
       value: Cell
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948721514866426537, guid: 6fcdebb1a0911de4582493c6e57cffc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private RectTransform _star2;
     [SerializeField] private RectTransform _star3;
     [SerializeField] private RectTransform _continueButton;
+    [SerializeField] private RectTransform _winText;
     
     [SerializeField] private AudioClip _winPanelSound;
     [SerializeField] private AudioClip _starSound;
@@ -58,37 +59,57 @@ public class UIController : MonoBehaviour
     }
 
     public void ShowWinPanel()
-    {
-        _winPanel.gameObject.SetActive(true);
-        _winPanel.DOScale(Vector3.one, 0.5f)
-            .SetEase(Ease.OutBack)
-            .OnStart(() =>
-            {
-                TryPlaySound(_winPanelSound);
-            })
-            .OnComplete(() =>
-            {
-                _star1.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
-                    .OnStart(() => TryPlaySound(_starSound))
-                    .OnComplete(() =>
-                    {
-                        _star2.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
-                            .OnStart(() => TryPlaySound(_starSound))
-                            .OnComplete(() =>
-                            {
-                                _star3.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
-                                    .OnStart(() => TryPlaySound(_starSound))
-                                    .OnComplete(() =>
-                                    {
-                                        _continueButton.gameObject.SetActive(true);
-                                        _continueButton.DOScale(Vector3.one, 0.4f)
-                                            .SetEase(Ease.OutBack)
-                                            .OnStart(() => TryPlaySound(_continueButtonSound));
-                                    });
-                            });
-                    });
-            });
-    }
+{
+    _winPanel.gameObject.SetActive(true);
+    
+    _winText.anchoredPosition = new Vector2(-1000f, _winText.anchoredPosition.y);
+    _continueButton.anchoredPosition = new Vector2(1000f, _continueButton.anchoredPosition.y);
+    _star1.localScale = Vector3.zero;
+    _star2.localScale = Vector3.zero;
+    _star3.localScale = Vector3.zero;
+    _continueButton.localScale = Vector3.one;
+    _continueButton.gameObject.SetActive(false);
+
+    _winPanel.DOScale(Vector3.one, 0.5f)
+        .SetEase(Ease.OutBack)
+        .OnStart(() =>
+        {
+            TryPlaySound(_winPanelSound);
+        })
+        .OnComplete(() =>
+        {
+            _winText.DOAnchorPosX(0f, 0.5f)
+                .SetEase(Ease.OutBack)
+                .OnComplete(() =>
+                {
+                    _winText.DOPunchScale(Vector3.one * 0.1f, 0.3f, 10, 1);
+
+                    _star1.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
+                        .OnStart(() => TryPlaySound(_starSound))
+                        .OnComplete(() =>
+                        {
+                            _star2.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
+                                .OnStart(() => TryPlaySound(_starSound))
+                                .OnComplete(() =>
+                                {
+                                    _star3.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack)
+                                        .OnStart(() => TryPlaySound(_starSound))
+                                        .OnComplete(() =>
+                                        {
+                                            _continueButton.gameObject.SetActive(true);
+                                            _continueButton.DOAnchorPosX(0f, 0.5f)
+                                                .SetEase(Ease.OutBack)
+                                                .OnStart(() => TryPlaySound(_continueButtonSound))
+                                                .OnComplete(() =>
+                                                {
+                                                    _continueButton.DOPunchScale(Vector3.one * 0.1f, 0.3f, 10, 1);
+                                                });
+                                        });
+                                });
+                        });
+                });
+        });
+}
 
     private void TryPlaySound(AudioClip clip)
     {
