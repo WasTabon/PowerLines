@@ -1,8 +1,13 @@
 using DG.Tweening;
-    using UnityEngine;
+using PowerLines.Scripts;
+using UnityEngine;
 
     public class BuildingController : MonoBehaviour
     {
+        [SerializeField] private AudioClip _buildSound;
+        [SerializeField] private AudioClip _placeSound;
+        [SerializeField] private AudioClip _cantPlaceSound;
+        
         [SerializeField] private GameObject _placeParticle;
         
         [SerializeField] private int _startVolt;
@@ -78,6 +83,7 @@ using DG.Tweening;
             ClickOnBuilding(_cell);
 
             Instantiate(_placeParticle, _building.gameObject.transform.position, Quaternion.identity);
+            MusicController.Instance.PlaySpecificSound(_buildSound);
             
             _building = null;
             _cell = null;
@@ -103,11 +109,13 @@ using DG.Tweening;
             
             if (!isOverlapBuilding && _building.GetComponent<Building>().Volt > 0)
             {
+                MusicController.Instance.PlaySpecificSound(_placeSound);
                 UIController.Instance.ShowBuildPanel();
             }
             else if (_building.GetComponent<Building>().Volt <= 0 && !isOverlapBuilding)
             {
                 UIController.Instance.PopupVoltTooLowPanel();
+                MusicController.Instance.PlaySpecificSound(_cantPlaceSound);
                 Destroy(_building);
                 _building = null;
                 _cell = null;
@@ -116,6 +124,7 @@ using DG.Tweening;
             else if (isOverlapBuilding)
             {
                 UIController.Instance.PopupCantBuildPanel();
+                MusicController.Instance.PlaySpecificSound(_cantPlaceSound);
                 Destroy(_building);
                 _building = null;
                 _cell = null;

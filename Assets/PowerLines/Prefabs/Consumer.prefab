@@ -148,6 +148,8 @@ MonoBehaviour:
   _volt: 0
   checkBoxSize: {x: 0, y: 0}
   checkDirections: -1
+  _tooMuchSound: {fileID: 8300000, guid: 6a36cf591bedb7b4da68f102e30e2aac, type: 3}
+  _notSound: {fileID: 8300000, guid: 6541a5cde8a9ebe4cafabf5537d0ab32, type: 3}
   _tooMuchParticle: {fileID: 8764043878647920493, guid: c4ed38c72957f2241ad144a1614956d9, type: 3}
   _notParticle: {fileID: 6721007384533448649, guid: 98557619806f23c499c9cdb620a31541, type: 3}
 --- !u!50 &4229167394564450202
