@@ -16,6 +16,10 @@ public class Consumer : Building
             if (building.Volt == 5)
             {
                 UIController.Instance.ShowWinPanel();
+                int stars = PlayerPrefs.GetInt("stars", 0);
+                stars += 3;
+                PlayerPrefs.SetInt("stars", stars);
+                PlayerPrefs.Save();
             }
             else if (building.Volt > 5)
             {
