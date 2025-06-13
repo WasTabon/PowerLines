@@ -8,6 +8,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
+    public void LoadScene(int level)
+    {
+        SceneManager.LoadScene(level);
+    }
+    
     public void ResetLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

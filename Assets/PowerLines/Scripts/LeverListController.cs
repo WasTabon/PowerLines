@@ -12,6 +12,7 @@ public class LeverListController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _starsText;
     [SerializeField] private TextMeshProUGUI _gemsText;
     
+    [SerializeField] private GameObject _notEnoughMoneyPanel;
     [SerializeField] private GameObject _buyLevelPanel;
     [SerializeField] private List<Button> _buttons;
 
@@ -19,6 +20,27 @@ public class LeverListController : MonoBehaviour
     
     private void Awake()
     {
+        foreach (Button button in _buttons)
+        {
+            button.interactable = false;
+        }
+
+        for (int i = 0; i < _buttons.Count; i++)
+        {
+            foreach (Transform child in _buttons[i].transform.GetComponentsInChildren<Transform>(true))
+            {
+                if (child.CompareTag("LevelText"))
+                {
+                    TextMeshProUGUI tmpText = child.GetComponent<TextMeshProUGUI>();
+                    if (tmpText != null)
+                    {
+                        tmpText.text = (i + 1).ToString();
+                    }
+                    break;
+                }
+            }
+        }
+        
         GetStarsAndGems();
     }
 
@@ -33,6 +55,8 @@ public class LeverListController : MonoBehaviour
                 break;
             }
         }
+
+        _buttons[0].interactable = true;
         
         GetLevels();
     }
@@ -64,7 +88,12 @@ public class LeverListController : MonoBehaviour
                 }
             }
             PlayerPrefs.SetInt($"{_buttons.IndexOf(_activeButton)}", 1);
+            _buttons[_buttons.IndexOf(_activeButton)].interactable = true;
             _activeButton = null;
+        }
+        else
+        {
+            _notEnoughMoneyPanel.SetActive(true);
         }
     }
 
@@ -83,8 +112,19 @@ public class LeverListController : MonoBehaviour
                 }
             }
             PlayerPrefs.SetInt($"{_buttons.IndexOf(_activeButton)}", 1);
+            _buttons[_buttons.IndexOf(_activeButton)].interactable = true;
             _activeButton = null;
         }
+        else
+        {
+            _notEnoughMoneyPanel.SetActive(true);
+        }
+    }
+
+    public void CancelBuyLevel()
+    {
+        _buyLevelPanel.gameObject.SetActive(false);
+        _activeButton = null;
     }
 
     private void GetStarsAndGems()
@@ -100,6 +140,7 @@ public class LeverListController : MonoBehaviour
             if (PlayerPrefs.HasKey($"i"))
             {
                 Transform[] children = _buttons[i].GetComponentsInChildren<Transform>(true);
+                _buttons[i].interactable = true;
                 foreach (Transform child in children)
                 {
                     if (child.CompareTag("Unlock"))
