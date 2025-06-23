@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PowerLines/Scenes/Level1.unity
     guid: 881e5df06901e694cbe2ef0e57800f0f
+  - enabled: 1
+    path: Assets/PowerLines/Scenes/Level2.unity
+    guid: 08293b3234c02dc4cb72c6c97bd60b14
   m_configObjects: {}
