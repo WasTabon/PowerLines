@@ -57,8 +57,8 @@ public class UIController : MonoBehaviour
 
     public void SetCurrentBuildingText(string name, string volt)
     {
-        _currentBuildingText.ShowText($"Current Building:\n{name}");
-        _currentBuildingVoltText.ShowText($"Volt: {volt}");
+        _currentBuildingText.ShowText($"Building:\n{name}");
+        _currentBuildingVoltText.ShowText($"{volt}");
     }
 
     public void ShowWinPanel()
