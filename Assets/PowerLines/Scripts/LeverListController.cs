@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,8 +5,10 @@ using UnityEngine.UI;
 
 public class LeverListController : MonoBehaviour
 {
+    public static LeverListController Instance;
+    
     [SerializeField] private int _starsCount;
-    [SerializeField] private int _gemsCount;
+    public int _gemsCount;
 
     [SerializeField] private TextMeshProUGUI _starsText;
     [SerializeField] private TextMeshProUGUI _gemsText;
@@ -20,6 +21,8 @@ public class LeverListController : MonoBehaviour
     
     private void Awake()
     {
+        Instance = this;
+        
         foreach (Button button in _buttons)
         {
             button.interactable = false;
@@ -95,6 +98,8 @@ public class LeverListController : MonoBehaviour
         {
             _notEnoughMoneyPanel.SetActive(true);
         }
+
+        SaveStarsAndGems();
     }
 
     public void BuyLevelGems()
@@ -119,6 +124,8 @@ public class LeverListController : MonoBehaviour
         {
             _notEnoughMoneyPanel.SetActive(true);
         }
+
+        SaveStarsAndGems();
     }
 
     public void CancelBuyLevel()
@@ -131,6 +138,12 @@ public class LeverListController : MonoBehaviour
     {
         _starsCount = PlayerPrefs.GetInt("stars", 0);
         _gemsCount = PlayerPrefs.GetInt("gems", 0);
+    }
+    private void SaveStarsAndGems()
+    {
+        PlayerPrefs.SetInt("stars", _starsCount);
+        PlayerPrefs.SetInt("gems", _gemsCount);
+        PlayerPrefs.Save();
     }
 
     private void GetLevels()
