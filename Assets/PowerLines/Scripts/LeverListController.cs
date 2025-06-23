@@ -93,6 +93,7 @@ public class LeverListController : MonoBehaviour
             PlayerPrefs.SetInt($"{_buttons.IndexOf(_activeButton)}", 1);
             _buttons[_buttons.IndexOf(_activeButton)].interactable = true;
             _activeButton = null;
+            _buyLevelPanel.gameObject.SetActive(false);
         }
         else
         {
@@ -119,6 +120,7 @@ public class LeverListController : MonoBehaviour
             PlayerPrefs.SetInt($"{_buttons.IndexOf(_activeButton)}", 1);
             _buttons[_buttons.IndexOf(_activeButton)].interactable = true;
             _activeButton = null;
+            _buyLevelPanel.gameObject.SetActive(false);
         }
         else
         {
@@ -150,11 +152,11 @@ public class LeverListController : MonoBehaviour
     {
         for (int i = 0; i < _buttons.Count; i++)
         {
-            if (PlayerPrefs.HasKey($"i"))
+            if (PlayerPrefs.HasKey($"{i}"))
             {
-                Transform[] children = _buttons[i].GetComponentsInChildren<Transform>(true);
                 _buttons[i].interactable = true;
-                foreach (Transform child in children)
+
+                foreach (Transform child in _buttons[i].GetComponentsInChildren<Transform>(true))
                 {
                     if (child.CompareTag("Unlock"))
                     {
